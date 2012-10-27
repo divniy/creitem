@@ -25,9 +25,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem "spork-rails"
   gem 'factory_girl_rails'
+  gem 'shoulda'
   gem 'ffaker'
+  gem "spork-rails"
 end
 
 gem 'jquery-rails'
