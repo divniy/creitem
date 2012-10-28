@@ -5,7 +5,9 @@ FactoryGirl.define do
     price { rand(100..10000) }
 
     trait(:updated_title) { title "Updated item" }
+    factory(:another_product) { title "Another title" }
   end
+
   factory :invalid_product, parent: :product do
     title nil
     description nil

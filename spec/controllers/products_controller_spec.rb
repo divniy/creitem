@@ -15,6 +15,13 @@ describe ProductsController do
       get :index, {}, valid_session
       assigns(:products).should eq([product])
     end
+
+    it "assigns products in right order" do
+      older_product = create(:product, created_at: 2.days.ago)
+      newer_product = create(:another_product)
+      get :index, {}, valid_session
+      assigns(:products).should eq([newer_product, older_product])
+    end
   end
 
   describe "GET #show" do
