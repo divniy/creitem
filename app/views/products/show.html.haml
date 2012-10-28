@@ -1,15 +1,13 @@
-%p#notice= notice
+#product.row
+  .info.span6
+    %h1= @product.title
+    %p= @product.description
+    .btn-toolbar
+      =render 'toolbar', :product => @product
+      .btn-group= link_to 'Edit', edit_product_path(@product), class: 'btn btn-warning btn-small'
+      .btn-group= link_to 'Gallery', products_path, class: 'btn btn-small'
 
-%p
-  %b Title:
-  = @product.title
-%p
-  %b Description:
-  = @product.description
-%p
-  %b Price:
-  = @product.price
+  .gallery.span6
+    .main-image
 
-= link_to 'Edit', edit_product_path(@product)
-\|
-= link_to 'Back', products_path
+

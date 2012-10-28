@@ -1,10 +1,14 @@
 = simple_form_for(@product) do |f|
-  = f.error_notification
+  .span12= f.error_notification
+  .span6
+    .form-inputs
+      = f.input :title
+      = f.input :description, input_html: {rows: 6, class: 'span6'}
+      = f.input :price
 
-  .form-inputs
-    = f.input :title
-    = f.input :description
-    = f.input :price
-
-  .form-actions
-    = f.button :submit
+    .form-actions
+      = f.button :submit, class: 'btn btn-primary'
+      - if action_name == 'edit'
+        = link_to 'Show', product_path(@product), class: 'btn btn-small'
+        = link_to 'New', new_product_path, class: 'btn btn-small'
+      = link_to 'Gallery', products_path, class: 'btn btn-small'

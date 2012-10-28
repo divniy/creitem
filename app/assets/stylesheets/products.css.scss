@@ -1,3 +1,53 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+#products {
+  .product {
+    border: 1px solid gray;
+    padding: 5px; margin-bottom: 20px;
+    @include border-radius(10px);
+    @include clearfix;
+    .image {
+      width: 100%;
+      height: 200px;
+      background-color: gray;
+      margin-bottom: 5px;
+      @include border-radius(5px);
+    }
+    .pane {
+      @include clearfix;
+      height: 2.2em; line-height: 1.1em;
+      .title {
+        float: left;
+        width: 60%;
+      }
+      .product-toolbar {
+        float: right;
+        .btn { padding: 3px 6px;}
+      }
+    }
+    a.new-product {
+      display: block; text-align: center; padding: 90px 0 110px;
+      width: 100%;
+
+      font-size: 100px; color: white; background-color: gray;
+      &:hover { text-decoration: none; }
+    }
+  }
+}
+
+#product {
+  .gallery {
+    .main-image {
+      width: 100%;
+      height: 460px;
+      background-color: gray;
+    }
+  }
+}
+
+.product-toolbar {
+  //display: inline-block;
+}

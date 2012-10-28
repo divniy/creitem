@@ -13,3 +13,7 @@
  */
 
 @import "bootstrap";
+
+// Tweek for Firefox
+a:active, a:focus { outline: none; -moz-outline-style: none; }
+:focus { -moz-outline-style: none; }
