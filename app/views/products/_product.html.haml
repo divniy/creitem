@@ -1,6 +1,6 @@
 .product-cell.span3
   .product
-    .image
+    .image= link_to image_tag(product.image_url(:thumb)), product
     .pane
       .title= link_to product.title, product
       = render 'toolbar', :product => product

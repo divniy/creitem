@@ -10,18 +10,20 @@
     @include border-radius(10px);
     @include clearfix;
     .image {
-      width: 100%;
-      height: 200px;
-      background-color: gray;
       margin-bottom: 5px;
-      @include border-radius(5px);
+      img {
+        @include border-radius(5px);
+      }
     }
     .pane {
       @include clearfix;
-      height: 2.2em; line-height: 1.1em;
+      height: 2.3em; line-height: 1.1em;
       .title {
         float: left;
         width: 60%;
+        a {
+          color: #333; font-weight: bold;
+        }
       }
       .product-toolbar {
         float: right;
@@ -29,8 +31,9 @@
       }
     }
     a.new-product {
-      display: block; text-align: center; padding: 90px 0 110px;
+      display: block; text-align: center; padding: 90px 0 95px;
       width: 100%;
+      @include border-radius(5px);
 
       font-size: 100px; color: white; background-color: gray;
       &:hover { text-decoration: none; }
@@ -40,11 +43,7 @@
 
 #product {
   .gallery {
-    .main-image {
-      width: 100%;
-      height: 460px;
-      background-color: gray;
-    }
+
   }
 }
 

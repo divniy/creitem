@@ -8,6 +8,7 @@
       .btn-group= link_to 'Gallery', products_path, class: 'btn btn-small'
 
   .gallery.span6
-    .main-image
+    .main-image= image_tag @product.image_url
+
 
 
