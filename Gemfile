@@ -34,7 +34,8 @@ end
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'carrierwave'
-gem "mini_magick"
+gem 'mini_magick'
+gem 'state_machine'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
