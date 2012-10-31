@@ -9,5 +9,9 @@ FactoryGirl.define do
       description "Some text"
       state "prepared"
     end
+
+    factory :active_showcase, :parent => :prepared_showcase do
+      state "active"
+    end
   end
 end
