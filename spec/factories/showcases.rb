@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :showcase do
-    title "Test showcase"
+    title { Faker::Lorem.words(3).join(' ').capitalize}
     state "dummy"
 
     factory :prepared_showcase do
-      description "Some text"
+      description { Faker::Lorem.paragraph(5) }
       state "prepared"
     end
 

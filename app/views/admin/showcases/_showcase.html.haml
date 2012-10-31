@@ -1,0 +1,7 @@
+%tr
+  %td= link_to showcase.title, admin_showcase_path(showcase)
+  %td= showcase.state
+  %td
+    .btn-group
+      = link_to "Edit", edit_admin_showcase_path(showcase), class: 'btn btn-warning btn-small'
+      = link_to "Delete", admin_showcase_path(showcase), method: :delete, class: 'btn btn-danger btn-small'

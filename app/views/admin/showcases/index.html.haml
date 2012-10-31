@@ -1,0 +1,12 @@
+%h1 Showcases
+#admin-showcases.row
+  .span12
+    %table.table.table-condensed.table-hover
+      %thead
+        %tr
+          %td Showcase Title
+          %td State
+          %td Actions
+      %tbody
+        = render @showcases
+    = link_to "New", new_admin_showcase_path, class: 'btn btn-primary'
