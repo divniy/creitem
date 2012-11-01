@@ -16,7 +16,7 @@ describe Showcase do
     end
 
     context "with :prepared state" do
-      subject { create(:prepared_showcase) }
+      subject { create(:complete_showcase) }
 
       it "became :dummy if has not description" do
         subject.description = ""
@@ -31,7 +31,7 @@ describe Showcase do
     end
 
     context "with :active state" do
-      subject { create(:active_showcase) }
+      subject { create(:complete_showcase, :active) }
 
       it { should validate_presence_of :description }
       it "can be deactivate by view" do

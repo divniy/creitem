@@ -1,2 +1,4 @@
-%h1 Admin::Showcases#new
-%p Find me in app/views/admin/showcases/new.html.haml
+#admin-showcase-new
+  %h1 New Showcase
+  = render :layout => 'form' do
+    = link_to "Showcases", admin_showcases_path, class: 'btn'

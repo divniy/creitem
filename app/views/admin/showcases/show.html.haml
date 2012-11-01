@@ -1,2 +1,12 @@
-%h1 Admin::Showcases#show
-%p Find me in app/views/admin/showcases/show.html.haml
+#admin-showcase
+  %h1 Showcase
+  %dl
+    %dt Title
+    %dd= @showcase.title
+    %dt State
+    %dd= @showcase.state
+    %dt Description
+    %dd= @showcase.description || '(empty)'
+  .btn-toolbar
+    = link_to "Edit", edit_admin_showcase_path(@showcase), class: 'btn btn-warning'
+    = link_to "Showcases", admin_showcases_path, class: 'btn'

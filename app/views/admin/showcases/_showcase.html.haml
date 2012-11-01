@@ -4,4 +4,4 @@
   %td
     .btn-group
       = link_to "Edit", edit_admin_showcase_path(showcase), class: 'btn btn-warning btn-small'
-      = link_to "Delete", admin_showcase_path(showcase), method: :delete, class: 'btn btn-danger btn-small'
+      = link_to "Delete", admin_showcase_path(showcase), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-small'
