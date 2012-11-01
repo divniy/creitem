@@ -1,5 +1,5 @@
 class Admin::ShowcasesController < ApplicationController
-
+  layout 'admin'
   # GET /admin/showcases
   def index
     @showcases = Showcase.all
