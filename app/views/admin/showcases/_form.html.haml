@@ -3,6 +3,11 @@
   .form-inputs
     = f.input :title
     = f.input :description, input_html: {rows: 6, class: 'span9'}
+    = f.input :is_active, as: :boolean
+    =# f.input :public_state_event, collection: @showcase.public_state_events, as: :radio_buttons
+    =# if @showcase.public_state_events.any?
+    =# @showcase.public_state_events.each do |event|
+
   .form-actions
     = f.button :submit, class: 'btn btn-primary'
     = yield

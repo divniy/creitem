@@ -42,4 +42,27 @@ describe Showcase do
       end
     end
   end
+
+  describe "#is_active" do
+    it "true for active showcase" do
+      showcase = build(:complete_showcase, :active)
+      expect(showcase.is_active).to be_true
+    end
+
+    it "false for prepared showcase" do
+      showcase = build(:complete_showcase)
+      expect(showcase.is_active).to be_false
+    end
+  end
+
+  describe "#is_active=" do
+    it "activate showcase when true" do
+      showcase = build(:complete_showcase, :prepared, is_active: '1')
+      expect{showcase.save}.to change{showcase.state}.from("prepared").to("active")
+    end
+    it "deactivate showcase when false" do
+      showcase = build(:complete_showcase, :active, is_active: '0')
+      expect{showcase.save}.to change{showcase.state}.from("active").to("prepared")
+    end
+  end
 end
