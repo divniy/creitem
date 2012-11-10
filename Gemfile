@@ -22,7 +22,10 @@ end
 
 group :development do
   gem 'spork-rails'
-  
+  gem 'rb-fsevent', :require => false
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
