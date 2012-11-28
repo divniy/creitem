@@ -4,65 +4,52 @@ describe Showcase do
   it { should validate_presence_of(:title) }
   its(:state) { should eq("dummy") }
 
-  describe "state machine behavior" do
-    #describe "state"
-    context "with :dummy state" do
-      subject { create(:showcase) }
+  context 'with :dummy state' do
+    subject { build(:dummy_showcase) }
 
-      it "became :prepared only if has description" do
-        subject.description = "presence"
-        expect{subject.save}.to change{subject.state}.from("dummy").to("prepared")
-      end
+    it { should be_valid }
+
+    it "can be prepared when has description" do
+      subject.description = "presence"
+      expect(subject.can_prepare?).to be_true
     end
 
-    context "with :prepared state" do
-      subject { create(:complete_showcase) }
-
-      it "became :dummy if has not description" do
-        subject.description = ""
-        expect{subject.save}.to change{subject.state}.from("prepared").to("dummy")
-      end
-      it "can be activate by view" do
-        expect(subject.public_state_events).to include(:activate)
-      end
-      it "#activate event change state to :active" do
-        expect{subject.activate}.to change{subject.state}.from("prepared").to("active")
-      end
-    end
-
-    context "with :active state" do
-      subject { create(:complete_showcase, :active) }
-
-      it { should validate_presence_of :description }
-      it "can be deactivate by view" do
-        expect(subject.public_state_events).to include(:deactivate)
-      end
-      it "#deactivate event change state to :prepared" do
-        expect{subject.deactivate}.to change{subject.state}.from("active").to("prepared")
-      end
+    it "become complete when can be prepared" do
+      subject.description = "presence"
+      expect{subject.save}.to change{subject.state}.from("dummy").to("complete")
     end
   end
 
-  describe "#is_active" do
-    it "true for active showcase" do
-      showcase = build(:complete_showcase, :active)
-      expect(showcase.is_active).to be_true
+  context 'with :complete state' do
+    subject { build(:complete_showcase) }
+
+    it "can be prepared when has no description" do
+      subject.description = ""
+      expect(subject.can_prepare?).to be_true
     end
 
-    it "false for prepared showcase" do
-      showcase = build(:complete_showcase)
-      expect(showcase.is_active).to be_false
+    it "can be activated" do
+      expect{subject.activate}.to change{subject.state}.from("complete").to("active")
+    end
+
+    it "can toggle activity by attribute" do
+      subject.active = "1"
+      expect{subject.save}.to change{subject.state}.from("complete").to("active")
     end
   end
 
-  describe "#is_active=" do
-    it "activate showcase when true" do
-      showcase = build(:complete_showcase, :prepared, is_active: '1')
-      expect{showcase.save}.to change{showcase.state}.from("prepared").to("active")
+  context 'with :active state' do
+    subject { build(:active_showcase) }
+
+    it "can be deactivated" do
+      expect{subject.deactivate}.to change{subject.state}.from("active").to("complete")
     end
-    it "deactivate showcase when false" do
-      showcase = build(:complete_showcase, :active, is_active: '0')
-      expect{showcase.save}.to change{showcase.state}.from("active").to("prepared")
+
+    it "can toggle activity by attribute to complete" do
+      subject.active = "0"
+      expect{subject.save}.to change{subject.state}.from("active").to("complete")
     end
   end
+  
+  
 end
