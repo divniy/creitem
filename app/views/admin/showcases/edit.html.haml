@@ -1,0 +1,5 @@
+#admin-showcase-new
+  %h1 Edit Showcase
+  = render :layout => 'form' do
+    = link_to "Show", admin_showcase_path(@showcase), class: 'btn'
+    = link_to "Showcases", admin_showcases_path, class: 'btn'

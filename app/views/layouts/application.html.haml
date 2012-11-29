@@ -2,8 +2,7 @@
 %html
   = render 'layouts/head'
   %body
-    .navbar
-      .navbar-inner= link_to "CreItem", root_path, class: "brand"
+    = render 'layouts/navbar'
     .container
       - if notice
         .alert.alert-success= notice

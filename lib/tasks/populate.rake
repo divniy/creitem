@@ -11,5 +11,8 @@ namespace :db do
         )
       end
     end
+    Showcase.transaction do
+      6.times { FactoryGirl.create(:showcase) }
+    end
   end
 end

@@ -1,29 +1,44 @@
 class Showcase < ActiveRecord::Base
-  attr_accessible :title, :description
+  attr_accessible :title, :description, :active
 
   validates_presence_of :title
+  validate :content_ready_when_active
 
-  after_save :verify
+  before_save :correct_state, :if => lambda {|showcase| showcase.can_correct_state?}
+  before_save :toggle_activity, :if => lambda {|showcase| showcase.active != showcase.active?}
 
   state_machine :initial => :dummy do
     state :dummy
-    state :prepared
+    state :complete
     state :active do
       validates_presence_of :description
     end
 
-    event :verify do
-      transition :dummy => :prepared, if: lambda {|showcase| showcase.description.present? }
-      transition :prepared => :dummy, if: lambda {|showcase| showcase.description.blank? }
+    event :correct_state do
+      transition :dummy => :complete, :if => lambda {|showcase| showcase.content_ready?}
+      transition :complete => :dummy, :unless => lambda {|showcase| showcase.content_ready?}
+    end   
+
+    event :toggle_activity do
+      transition :complete => :active
+      transition :active => :complete
     end
   end
 
-  state_machine :public_state, :attribute => :state do
-    event :activate do
-      transition :prepared => :active
-    end
-    event :deactivate do
-      transition :active => :prepared
-    end
+  def active
+    return active? if @active.nil?
+    @active
+  end
+
+  def active=(value)
+    @active = (value == "1")
+  end  
+
+  def content_ready?
+    description.present?
+  end
+
+  def content_ready_when_active
+    errors.add(:active, "can`t be active without required content") if active && !content_ready?
   end
 end
