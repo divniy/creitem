@@ -11,12 +11,12 @@ class Showcase < ActiveRecord::Base
     state :dummy
     state :complete
     state :active do
-      validates_presence_of :description
+      validates_presence_of :description, :if => :active
     end
 
     event :correct_state do
-      transition :dummy => :complete, :if => lambda {|showcase| showcase.content_ready?}
-      transition :complete => :dummy, :unless => lambda {|showcase| showcase.content_ready?}
+      transition :dummy => :complete, :if => :content_ready?
+      transition :complete => :dummy, :unless => :content_ready?
     end   
 
     event :toggle_activity do
