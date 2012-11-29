@@ -4,18 +4,16 @@ FactoryGirl.define do
   factory :showcase, aliases: [:dummy_showcase] do
     title { Faker::Lorem.words(3).join(' ').capitalize }
     
-    trait(:dummy) { state "dummy" }
-    trait(:complete) { state "complete" }
-    trait(:active) { state "active" }
+    trait(:with_description) { description { Faker::Lorem.paragraph(5) } }
 
     factory :complete_showcase do
-      description { Faker::Lorem.paragraph(5) }
-      complete
+      with_description
+      state "complete"
     end
 
     factory :active_showcase do
-      description { Faker::Lorem.paragraph(5) }
-      active
+      with_description
+      state "active"
     end
   end
 end
